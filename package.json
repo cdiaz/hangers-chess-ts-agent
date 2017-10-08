@@ -1,0 +1,22 @@
+{
+  "name": "hangers-chess-ts-agent",
+  "version": "1.0.0",
+  "description": "Artificial Intelligence",
+  "author": "Cristiam Diaz <c.diaz@udla.edu.co>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "prestart:prod": "tsc",
+    "start:prod": "node dist/server.js"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "dotenv": "^4.0.0",
+    "qs": "^6.5.1",
+    "typescript": "^2.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.28",
+    "ts-node": "^3.3.0"
+  }
+}

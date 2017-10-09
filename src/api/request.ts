@@ -17,7 +17,7 @@ class Api{
 
     public gameStatus(codePublic){
       return new Promise ((resolve, reject) => {
-        axios.get(this.api_url+'/box/table/get-table'+codePublic)
+        axios.get(this.api_url+'/box/table/get-table/'+codePublic)
         .then(function (response) {
           resolve(response.data);
         })

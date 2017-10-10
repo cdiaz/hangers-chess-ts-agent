@@ -13,31 +13,35 @@ class Main{
   constructor(){
     this.turn = 0
     this.Init()
+    Api.sendMovement(1)
   }
 
-  public Init(){
+  public async Init(){
     console.log(`Current Turn is: ${this.turn}`)
-    if(this.turn != -1){
-      Api.gameStatus()
-      .then(data=>{
-        this.turn = data['turno']
+    //Check game status
+     let gameStatus = await Api.gameStatus()
+      this.turn = gameStatus['turno']
+      if(this.turn == -1) {
+        console.log(`Game over`)
+        process.exit()
+      }
+      else if(this.turn == -3){ 
+        console.log(`You are winner`)
+        process.exit()
+      }
+      else if(this.turn == -10){ 
+        console.log(`You are dead`)
+        process.exit()
+      } else {
+        //Send board to your Agent
+        if(gameStatus['tablero']){
+          Agent.strategy(gameStatus['tablero'])
+        }
+        //Call recursively
         this.Init()
-        Agent.strategy(data['tablero'])
-      })
-      .catch(e=> this.ErrorHandler(e))
-    }
-    else{
-      console.log(`Game over`)
-      process.exit()
     }
   }
 
-  public ErrorHandler(e){
-    console.log((e.code == `ENETUNREACH`)
-    ?`Network error`
-    :`Eror ${e.code}`)
-    throw new Error(e)
-  }
 }
 
 new Main()

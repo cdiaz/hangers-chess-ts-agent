@@ -13,7 +13,7 @@ class Main{
   constructor(){
     this.turn = 0
     this.Init()
-    Api.sendMovement(1)
+    /* Api.sendMovement(1) */
   }
 
   public async Init(){
